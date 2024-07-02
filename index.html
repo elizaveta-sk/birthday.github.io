@@ -1,9 +1,37 @@
-<html>
-
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Max's Birthday Gift</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
 <body>
-  <h1>LIZ</h1>
-  <p>Welcome to my website!</p>
-  <img src="https://content.codecademy.com/articles/github-pages-via-web-app/happy-ice-cream.gif" />
+    <div class="container">
+        <div class="intro">
+            <h1>Dear Max, Happy Birthday!</h1>
+            <p>Are you ready to choose your gift?</p>
+            <button id="yesButton1">Yes</button>
+            <button id="yesButton2">Yes</button>
+        </div>
+        <div class="gift-options hidden">
+            <div class="box" id="box1"></div>
+            <div class="box" id="box2"></div>
+            <div class="box" id="box3"></div>
+            <div class="box" id="box4"></div>
+        </div>
+        <div class="final-step hidden">
+            <p>Which one would you like to experience?</p>
+            <select id="giftSelect">
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+            </select>
+            <button id="chooseButton">Choose</button>
+            <p class="result hidden">Your desire is my command.<br><span class="small-text">now tell Liz which one you chose, because she doesn't know how to automate this yet.</span></p>
+        </div>
+    </div>
+    <script src="scripts.js"></script>
 </body>
-
 </html>
