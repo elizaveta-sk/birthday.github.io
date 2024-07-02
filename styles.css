@@ -1,0 +1,71 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Arial', sans-serif;
+    background-color: #007FFF;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.container {
+    text-align: center;
+}
+
+.hidden {
+    display: none;
+}
+
+h1, p {
+    margin: 20px 0;
+}
+
+button {
+    background-color: white;
+    color: #007FFF;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    margin: 5px;
+    font-size: 16px;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: #e0e0e0;
+}
+
+.gift-options {
+    display: flex;
+    justify-content: center;
+    margin: 20px 0;
+}
+
+.box {
+    width: 150px;
+    height: 150px;
+    background-color: white;
+    margin: 10px;
+    cursor: pointer;
+    transition: transform 0.3s;
+}
+
+.box:hover {
+    transform: scale(1.1);
+}
+
+.final-step p, .final-step select, .final-step button {
+    margin: 10px 0;
+}
+
+.result {
+    font-size: 24px;
+    margin-top: 20px;
+}
+
+.small-text {
+    font-size: 14px;
+    font-style: italic;
+}
