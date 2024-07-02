@@ -4,34 +4,93 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Max's Birthday Gift</title>
-    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            background-color: #00008B; /* sea-blue background */
+            font-family: Arial, sans-serif; /* modern font */
+            color: white; /* white text */
+            text-align: center; /* center align text */
+            padding-top: 50px; /* padding for top */
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .box {
+            width: 320px;
+            height: 180px;
+            background-color: #1d3557; /* darker blue for box */
+            display: inline-block;
+            margin: 10px;
+            cursor: pointer;
+            transition: transform 0.3s ease-in-out;
+        }
+        .box:hover {
+            transform: scale(1.05);
+        }
+        .message {
+            font-size: 1.2em;
+            margin-bottom: 20px;
+        }
+        .button {
+            padding: 10px 20px;
+            background-color: #90be6d; /* green button */
+            color: white;
+            border: none;
+            cursor: pointer;
+            font-size: 1em;
+            transition: background-color 0.3s ease;
+        }
+        .button:hover {
+            background-color: #4a8c5a; /* darker green on hover */
+        }
+    </style>
 </head>
 <body>
     <div class="container">
-        <div class="intro">
-            <h1>Dear Max, Happy Birthday!</h1>
-            <p>Are you ready to choose your gift?</p>
-            <button id="yesButton1">Yes</button>
-            <button id="yesButton2">Yes</button>
+        <div class="message">
+            <p>Dear Max, Happy Birthday! Are you ready to choose your gift?</p>
+            <button class="button" onclick="showGifts()">Yes</button>
         </div>
-        <div class="gift-options hidden">
-            <div class="box" id="box1"></div>
-            <div class="box" id="box2"></div>
-            <div class="box" id="box3"></div>
-            <div class="box" id="box4"></div>
+        
+        <div id="gifts" style="display: none;">
+            <div class="box" onclick="showVideo('https://www.youtube.com/embed/op0aJGB165A')">Video 1</div>
+            <div class="box" onclick="showVideo('https://www.youtube.com/embed/ufit4zSvTJ0')">Video 2</div>
+            <div class="box" onclick="showVideo('https://www.youtube.com/embed/3AL'reconduct-I-V88Do')">Video 3</div>
+            <div class="box" onclick="window.location.href='https://www.klook.com/en-US/activity/41323-tokyo-joypolis/'">Experience</div>
         </div>
-        <div class="final-step hidden">
+        
+        <div id="selection" style="display: none;">
             <p>Which one would you like to experience?</p>
-            <select id="giftSelect">
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
-                <option value="4">4</option>
-            </select>
-            <button id="chooseButton">Choose</button>
-            <p class="result hidden">Well, that's exciting! Alright :)<br><span class="small-text">(please tell Liz which one you chose, because she doesn't know how to automate this yet)</span></p>
+            <input type="number" id="choice" min="1" max="4">
+            <button class="button" onclick="makeChoice()">Choose</button>
+        </div>
+
+        <div id="confirmation" style="display: none;">
+            <p>Well, that's exciting! Alright :)</p>
+            <p>(Please inform Liz which one you chose, because she doesn't know how to automate this yet.)</p>
         </div>
     </div>
-    <script src="scripts.js"></script>
+
+    <script>
+        function showGifts() {
+            document.getElementById('gifts').style.display = 'block';
+            document.querySelector('.message').style.display = 'none';
+        }
+
+        function showVideo(videoUrl) {
+            document.getElementById('gifts').style.display = 'none';
+            document.getElementById('selection').style.display = 'block';
+            sessionStorage.setItem('videoUrl', videoUrl);
+        }
+
+        function makeChoice() {
+            var choice = document.getElementById('choice').value;
+            var videoUrl = sessionStorage.getItem('videoUrl');
+            document.getElementById('selection').style.display = 'none';
+            document.getElementById('confirmation').style.display = 'block';
+        }
+    </script>
 </body>
 </html>
