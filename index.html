@@ -3,94 +3,130 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Max's Birthday Gift</title>
+    <title>Max's Birthday</title>
     <style>
         body {
-            background-color: #00008B; /* sea-blue background */
-            font-family: Arial, sans-serif; /* modern font */
-            color: white; /* white text */
-            text-align: center; /* center align text */
-            padding-top: 50px; /* padding for top */
-        }
-        .container {
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 20px;
-        }
-        .box {
-            width: 320px;
-            height: 180px;
-            background-color: #1d3557; /* darker blue for box */
-            display: inline-block;
-            margin: 10px;
-            cursor: pointer;
-            transition: transform 0.3s ease-in-out;
-        }
-        .box:hover {
-            transform: scale(1.05);
-        }
-        .message {
-            font-size: 1.2em;
-            margin-bottom: 20px;
-        }
-        .button {
-            padding: 10px 20px;
-            background-color: #90be6d; /* green button */
+            background-color: #001f3f;
             color: white;
+            font-family: 'Arial', sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .hidden {
+            display: none;
+        }
+        .greeting, .videos, .final-message {
+            text-align: center;
+        }
+        .button, .choose-button {
+            background-color: white;
+            color: #001f3f;
             border: none;
+            padding: 10px 20px;
             cursor: pointer;
             font-size: 1em;
-            transition: background-color 0.3s ease;
+            margin-top: 20px;
         }
-        .button:hover {
-            background-color: #4a8c5a; /* darker green on hover */
+        .video-box {
+            width: 320px;
+            height: 180px;
+            margin: 10px;
+            background-color: #fff;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .video-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        .final-message {
+            font-family: 'Comic Sans MS', cursive, sans-serif;
+            font-size: 1.2em;
+            margin-top: 20px;
+        }
+        .small-text {
+            font-size: 0.8em;
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <div class="message">
-            <p>Dear Max, Happy Birthday! Are you ready to choose your gift?</p>
-            <button class="button" onclick="showGifts()">Yes</button>
-        </div>
-        
-        <div id="gifts" style="display: none;">
-            <div class="box" onclick="showVideo('https://www.youtube.com/embed/op0aJGB165A')">Video 1</div>
-            <div class="box" onclick="showVideo('https://www.youtube.com/embed/ufit4zSvTJ0')">Video 2</div>
-            <div class="box" onclick="showVideo('https://www.youtube.com/embed/3AL'reconduct-I-V88Do')">Video 3</div>
-            <div class="box" onclick="window.location.href='https://www.klook.com/en-US/activity/41323-tokyo-joypolis/'">Experience</div>
-        </div>
-        
-        <div id="selection" style="display: none;">
-            <p>Which one would you like to experience?</p>
-            <input type="number" id="choice" min="1" max="4">
-            <button class="button" onclick="makeChoice()">Choose</button>
-        </div>
 
-        <div id="confirmation" style="display: none;">
-            <p>Well, that's exciting! Alright :)</p>
-            <p>(Please inform Liz which one you chose, because she doesn't know how to automate this yet.)</p>
+    <div class="greeting">
+        <p>Dear Max, Happy Birthday!</p>
+        <p>Are you ready to choose your gift?</p>
+        <button class="button" onclick="showVideos()">Yes</button>
+    </div>
+
+    <div class="videos hidden">
+        <div class="video-container">
+            <div class="video-box" onclick="showVideo(1)">
+                <p>Video 1</p>
+            </div>
+            <div class="video-box" onclick="showVideo(2)">
+                <p>Video 2</p>
+            </div>
+            <div class="video-box" onclick="showVideo(3)">
+                <p>Video 3</p>
+            </div>
+            <div class="video-box" onclick="showLink()">
+                <p>Link</p>
+            </div>
         </div>
+        <div id="video1" class="hidden">
+            <iframe width="320" height="180" src="https://www.youtube.com/embed/op0aJGB165A" frameborder="0" allowfullscreen></iframe>
+        </div>
+        <div id="video2" class="hidden">
+            <iframe width="320" height="180" src="https://www.youtube.com/embed/ufit4zSvTJ0" frameborder="0" allowfullscreen></iframe>
+        </div>
+        <div id="video3" class="hidden">
+            <iframe width="320" height="180" src="https://www.youtube.com/embed/3AL0I-V88Do" frameborder="0" allowfullscreen></iframe>
+        </div>
+        <div id="link" class="hidden">
+            <a href="https://www.klook.com/en-US/activity/41323-tokyo-joypolis/" target="_blank">Tokyo Joypolis</a>
+        </div>
+        <p>Which one would you like to experience?</p>
+        <select id="choice">
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+        </select>
+        <button class="choose-button" onclick="showFinalMessage()">Choose</button>
+    </div>
+
+    <div class="final-message hidden">
+        <p>Well, that's exciting! Alright :)</p>
+        <p class="small-text">(please tell Liz which one you chose, because she doesn't know how to automate this yet)</p>
     </div>
 
     <script>
-        function showGifts() {
-            document.getElementById('gifts').style.display = 'block';
-            document.querySelector('.message').style.display = 'none';
+        function showVideos() {
+            document.querySelector('.greeting').classList.add('hidden');
+            document.querySelector('.videos').classList.remove('hidden');
         }
 
-        function showVideo(videoUrl) {
-            document.getElementById('gifts').style.display = 'none';
-            document.getElementById('selection').style.display = 'block';
-            sessionStorage.setItem('videoUrl', videoUrl);
+        function showVideo(num) {
+            document.querySelectorAll('.videos div[id]').forEach(el => el.classList.add('hidden'));
+            document.getElementById('video' + num).classList.remove('hidden');
         }
 
-        function makeChoice() {
-            var choice = document.getElementById('choice').value;
-            var videoUrl = sessionStorage.getItem('videoUrl');
-            document.getElementById('selection').style.display = 'none';
-            document.getElementById('confirmation').style.display = 'block';
+        function showLink() {
+            document.querySelectorAll('.videos div[id]').forEach(el => el.classList.add('hidden'));
+            document.getElementById('link').classList.remove('hidden');
+        }
+
+        function showFinalMessage() {
+            document.querySelector('.videos').classList.add('hidden');
+            document.querySelector('.final-message').classList.remove('hidden');
         }
     </script>
+
 </body>
 </html>
