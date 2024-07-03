@@ -54,6 +54,16 @@
         .small-text {
             font-size: 0.8em;
         }
+        iframe, .video-link {
+            width: 320px;
+            height: 180px;
+            border: none;
+        }
+        .video-link a {
+            color: white;
+            text-decoration: none;
+            font-size: 1.2em;
+        }
     </style>
 </head>
 <body>
@@ -66,30 +76,18 @@
 
     <div class="videos hidden">
         <div class="video-container">
-            <div class="video-box" onclick="showVideo(1)">
+            <div class="video-box" id="box1" onclick="showVideo(1)">
                 <p>Video 1</p>
             </div>
-            <div class="video-box" onclick="showVideo(2)">
+            <div class="video-box" id="box2" onclick="showVideo(2)">
                 <p>Video 2</p>
             </div>
-            <div class="video-box" onclick="showVideo(3)">
+            <div class="video-box" id="box3" onclick="showVideo(3)">
                 <p>Video 3</p>
             </div>
-            <div class="video-box" onclick="showLink()">
+            <div class="video-box" id="box4" onclick="showLink()">
                 <p>Link</p>
             </div>
-        </div>
-        <div id="video1" class="hidden">
-            <iframe width="320" height="180" src="https://www.youtube.com/embed/op0aJGB165A" frameborder="0" allowfullscreen></iframe>
-        </div>
-        <div id="video2" class="hidden">
-            <iframe width="320" height="180" src="https://www.youtube.com/embed/ufit4zSvTJ0" frameborder="0" allowfullscreen></iframe>
-        </div>
-        <div id="video3" class="hidden">
-            <iframe width="320" height="180" src="https://www.youtube.com/embed/3AL0I-V88Do" frameborder="0" allowfullscreen></iframe>
-        </div>
-        <div id="link" class="hidden">
-            <a href="https://www.klook.com/en-US/activity/41323-tokyo-joypolis/" target="_blank">Tokyo Joypolis</a>
         </div>
         <p>Which one would you like to experience?</p>
         <select id="choice">
@@ -113,13 +111,30 @@
         }
 
         function showVideo(num) {
-            document.querySelectorAll('.videos div[id]').forEach(el => el.classList.add('hidden'));
-            document.getElementById('video' + num).classList.remove('hidden');
+            const box = document.getElementById('box' + num);
+            const iframe = document.createElement('iframe');
+            if (num === 1) {
+                iframe.src = "https://www.youtube.com/embed/op0aJGB165A";
+            } else if (num === 2) {
+                iframe.src = "https://www.youtube.com/embed/ufit4zSvTJ0";
+            } else if (num === 3) {
+                iframe.src = "https://www.youtube.com/embed/3AL0I-V88Do";
+            }
+            box.innerHTML = '';
+            box.appendChild(iframe);
         }
 
         function showLink() {
-            document.querySelectorAll('.videos div[id]').forEach(el => el.classList.add('hidden'));
-            document.getElementById('link').classList.remove('hidden');
+            const box = document.getElementById('box4');
+            const linkDiv = document.createElement('div');
+            linkDiv.className = 'video-link';
+            const link = document.createElement('a');
+            link.href = "https://www.klook.com/en-US/activity/41323-tokyo-joypolis/";
+            link.target = "_blank";
+            link.textContent = "Tokyo Joypolis";
+            linkDiv.appendChild(link);
+            box.innerHTML = '';
+            box.appendChild(linkDiv);
         }
 
         function showFinalMessage() {
